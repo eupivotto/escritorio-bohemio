@@ -1,13 +1,3 @@
-import { Gallery } from '@/components/sections/Gallery'
-
-const galleryImages = [
-  { src: '/galeria/salao-1.jpg', alt: 'Salão principal' },
-  { src: '/galeria/cozinha-1.jpg', alt: 'Cozinha' },
-  { src: '/galeria/mesa-1.jpg', alt: 'Mesa posta' },
-  { src: '/galeria/balcao-1.jpg', alt: 'Balcão' },
-  { src: '/galeria/equipe-1.jpg', alt: 'Equipe' },
-]
-
 export default function ACasaPage() {
   return (
     <div className="min-h-screen bg-cream-200">
@@ -49,9 +39,6 @@ export default function ACasaPage() {
           </p>
         </div>
       </section>
-
-      {/* Galeria */}
-      <Gallery images={galleryImages} title="O espaço" />
     </div>
   )
 }

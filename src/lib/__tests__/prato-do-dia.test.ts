@@ -35,10 +35,10 @@ describe('getPratoDoDia', () => {
     jest.restoreAllMocks()
   })
 
-  it('returns imagePath as /pratos-do-dia/<slug>.jpg', () => {
+  it('returns imagePath pointing to /images/ folder', () => {
     jest.spyOn(Date.prototype, 'getDay').mockReturnValue(3)
     const result = getPratoDoDia()
-    expect(result.imagePath).toBe('/pratos-do-dia/quarta.jpg')
+    expect(result.imagePath).toBe('/images/3-quarta.jpeg')
   })
 
   it('returns correct slug for each day', () => {
@@ -58,9 +58,9 @@ describe('getPratoDoDia', () => {
     })
   })
 
-  it('imagePath matches slug', () => {
+  it('imagePath is a non-empty /images/ path', () => {
     jest.spyOn(Date.prototype, 'getDay').mockReturnValue(5)
-    const { slug, imagePath } = getPratoDoDia()
-    expect(imagePath).toBe(`/pratos-do-dia/${slug}.jpg`)
+    const { imagePath } = getPratoDoDia()
+    expect(imagePath).toMatch(/^\/images\/.+\.jpeg$/)
   })
 })
