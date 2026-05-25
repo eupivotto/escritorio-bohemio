@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
 const hanken = Hanken_Grotesk({
@@ -31,7 +33,11 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${hanken.variable} ${jetbrains.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col antialiased">{children}</body>
+      <body className="min-h-full flex flex-col antialiased">
+          <Header />
+          <main className="flex-1 pt-[72px]">{children}</main>
+          <Footer />
+        </body>
     </html>
   );
 }
