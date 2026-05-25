@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Wireframe — Cardápio v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream-50: #FAF6E9; --cream-100: #F1EBD3; --cream-200: #EAE3CB;
+    --cream-300: #D9D1B5; --ink-400: #8A8369; --ink-700: #3A3527; --ink-900: #1E1A0F;
+    --accent-terra: #B5532C; --accent-mustard: #C99320; --accent-olive: #7A7A2E;
+    --font-sans: "Hanken Grotesk", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+  }
+  body { font-family: var(--font-sans); background: #f0ece0; color: var(--ink-900); padding: 24px; }
+  h1 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .meta { font-family: var(--font-mono); font-size: 11px; color: var(--ink-400); margin-bottom: 24px; }
+  .frame { background: var(--cream-200); border-radius: 12px; overflow: hidden; box-shadow: 0 8px 40px rgba(30,26,15,0.18); max-width: 900px; margin: 0 auto; }
+
+  .wf-header { background: var(--cream-200); display: flex; align-items: center; justify-content: space-between; padding: 14px 32px; border-bottom: 1px solid rgba(30,26,15,0.1); }
+  .wf-logo { font-weight: 800; font-size: 15px; letter-spacing: -0.02em; }
+  .wf-nav { display: flex; gap: 24px; }
+  .wf-nav a { font-size: 13px; font-weight: 500; color: var(--ink-700); text-decoration: none; }
+  .wf-nav a.active { color: var(--ink-900); border-bottom: 1.5px solid var(--ink-900); padding-bottom: 1px; }
+  .wf-btn { background: var(--accent-terra); color: var(--cream-50); border: none; border-radius: 6px; padding: 7px 14px; font-family: var(--font-sans); font-size: 12px; font-weight: 600; cursor: pointer; }
+  .wf-btn-ghost { background: transparent; color: var(--ink-900); border: 1.5px solid var(--ink-900); border-radius: 6px; padding: 7px 14px; font-family: var(--font-sans); font-size: 12px; font-weight: 600; cursor: pointer; }
+  .wf-cta { display: flex; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-400); }
+  .wf-eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-400); margin-bottom: 8px; }
+  .annotation { display: inline-block; background: var(--accent-mustard); color: var(--ink-900); font-family: var(--font-mono); font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 4px; margin-left: 6px; letter-spacing: 0.04em; }
+  .divider { height: 1px; background: rgba(30,26,15,0.08); }
+
+  .wf-page-hero { padding: 48px 40px 32px; }
+  .wf-page-title { font-size: 56px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.0; }
+  .wf-page-sub { font-size: 15px; color: var(--ink-700); margin-top: 10px; max-width: 480px; line-height: 1.5; }
+
+  /* PRATO DO DIA */
+  .wf-daily { margin: 0 40px 32px; background: var(--ink-900); border-radius: 12px; display: grid; grid-template-columns: 1fr 260px; overflow: hidden; }
+  .wf-daily__text { padding: 28px 32px; }
+  .wf-daily__eyebrow { font-family: var(--font-mono); font-size: 10px; color: var(--accent-mustard); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+  .wf-daily__title { font-size: 26px; font-weight: 700; color: var(--cream-50); letter-spacing: -0.02em; line-height: 1.1; }
+  .wf-daily__desc { font-size: 13px; color: var(--cream-300); margin-top: 8px; line-height: 1.5; }
+  .wf-daily__price { font-family: var(--font-mono); font-size: 22px; font-weight: 500; color: var(--cream-50); margin-top: 16px; }
+  .wf-daily__image { background: var(--ink-700); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 10px; color: var(--ink-400); text-align: center; padding: 16px; }
+
+  /* FILTERS */
+  .wf-filters { display: flex; gap: 8px; padding: 0 40px 24px; }
+  .wf-filter { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(30,26,15,0.2); color: var(--ink-700); cursor: pointer; background: transparent; }
+  .wf-filter.active { background: var(--ink-900); color: var(--cream-50); border-color: var(--ink-900); }
+
+  /* MENU */
+  .wf-menu-section { padding: 0 40px 32px; }
+  .wf-menu-section + .wf-menu-section { border-top: 1px solid rgba(30,26,15,0.08); padding-top: 32px; }
+  .wf-cat-title { font-size: 11px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-400); margin-bottom: 16px; }
+  .wf-menu-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid rgba(30,26,15,0.06); gap: 16px; }
+  .wf-menu-row:last-child { border-bottom: none; }
+  .wf-menu-name { font-size: 15px; font-weight: 600; color: var(--ink-900); }
+  .wf-menu-desc { font-size: 12px; color: var(--ink-400); margin-top: 3px; line-height: 1.4; }
+  .wf-menu-price { font-family: var(--font-mono); font-size: 14px; font-weight: 500; color: var(--ink-900); white-space: nowrap; margin-left: 24px; flex-shrink: 0; }
+  .wf-badge { display: inline-block; font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; border: 1px solid rgba(30,26,15,0.2); color: var(--ink-700); margin-top: 5px; }
+  .wf-badge--olive { border-color: var(--accent-olive); color: var(--accent-olive); }
+  .wf-badge--accent { border-color: var(--accent-terra); color: var(--accent-terra); }
+
+  /* BEBIDAS — grid de cards */
+  .wf-drinks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0 40px 40px; }
+  .wf-drink-card { background: var(--cream-50); border-radius: 8px; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; }
+  .wf-drink-name { font-size: 14px; font-weight: 600; color: var(--ink-900); }
+  .wf-drink-sub { font-size: 11px; color: var(--ink-400); margin-top: 3px; }
+  .wf-drink-price { font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--ink-900); }
+
+  /* DRINKS SECTION LABEL */
+  .wf-drinks-header { padding: 32px 40px 16px; border-top: 1px solid rgba(30,26,15,0.08); }
+
+  /* FOOTER */
+  .wf-footer { background: var(--ink-900); color: var(--cream-50); padding: 40px 40px 24px; }
+  .wf-footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+  .wf-footer__brand-name { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; }
+  .wf-footer__brand-sub { font-size: 13px; color: var(--ink-400); margin-top: 8px; line-height: 1.5; }
+  .wf-footer__col-title { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-400); margin-bottom: 10px; }
+  .wf-footer__col p { font-size: 13px; line-height: 1.6; color: var(--cream-300); }
+  .wf-footer__base { display: flex; justify-content: space-between; padding-top: 20px; border-top: 1px solid rgba(250,246,233,0.08); font-family: var(--font-mono); font-size: 10px; color: var(--ink-400); }
+</style>
+</head>
+<body>
+<h1>Wireframe — Cardápio <span style="font-weight:400;color:#8A8369">v2 · categorias corretas</span></h1>
+<p class="meta">Pratos · Guarnições · Bebidas (refrigerante, água, cerveja)</p>
+
+<div class="frame">
+
+  <div class="wf-header">
+    <div class="wf-logo">Escritório de Bohemio</div>
+    <nav class="wf-nav">
+      <a href="#" class="active">Cardápio</a>
+      <a href="#">A Casa</a>
+      <a href="#">Eventos</a>
+      <a href="#">Para Empresas</a>
+      <a href="#">Contato</a>
+    </nav>
+    <div class="wf-cta">
+      <button class="wf-btn">Fale no WhatsApp</button>
+    </div>
+  </div>
+
+  <div class="wf-page-hero">
+    <div class="wf-eyebrow">O que tem hoje</div>
+    <div class="wf-page-title">Cardápio</div>
+    <div class="wf-page-sub">Pratos feitos na hora, com o que veio bom no dia. Cardápio enxuto por escolha.</div>
+  </div>
+
+  <!-- PRATO DO DIA -->
+  <div class="wf-daily">
+    <div class="wf-daily__text">
+      <div class="wf-daily__eyebrow">● Prato do dia <span class="annotation">muda seg–sáb</span></div>
+      <div class="wf-daily__title">Frango assado com ervas</div>
+      <div class="wf-daily__desc">Servido com arroz branco, feijão e salada da estação. Muda todo dia, feito na hora.</div>
+      <div class="wf-daily__price">R$ 38</div>
+    </div>
+    <div class="wf-daily__image">foto do prato<br/>/pratos-do-dia/terca.jpg</div>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="wf-filters">
+    <button class="wf-filter active">Todos</button>
+    <button class="wf-filter">Pratos</button>
+    <button class="wf-filter">Guarnições</button>
+    <button class="wf-filter">Bebidas</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PRATOS -->
+  <div class="wf-menu-section">
+    <div class="wf-cat-title">Pratos</div>
+    <div class="wf-menu-row">
+      <div>
+        <div class="wf-menu-name">Prato do dia <span class="annotation">automático</span></div>
+        <div class="wf-menu-desc">Muda diariamente — acompanha arroz, feijão e salada.</div>
+      </div>
+      <div class="wf-menu-price">R$ 38</div>
+    </div>
+    <div class="wf-menu-row">
+      <div>
+        <div class="wf-menu-name">Prato vegetariano</div>
+        <div class="wf-menu-desc">Opção sem carne. Pergunta no balcão qual é o de hoje.</div>
+        <div><span class="wf-badge wf-badge--olive">Vegetariano</span></div>
+      </div>
+      <div class="wf-menu-price">R$ 34</div>
+    </div>
+    <div class="wf-menu-row">
+      <div>
+        <div class="wf-menu-name">Marmita para viagem</div>
+        <div class="wf-menu-desc">O mesmo prato do dia embalado para levar.</div>
+      </div>
+      <div class="wf-menu-price">R$ 32</div>
+    </div>
+  </div>
+
+  <!-- GUARNIÇÕES -->
+  <div class="wf-menu-section">
+    <div class="wf-cat-title">Guarnições</div>
+    <div class="wf-menu-row">
+      <div>
+        <div class="wf-menu-name">Arroz branco</div>
+      </div>
+      <div class="wf-menu-price">R$ 8</div>
+    </div>
+    <div class="wf-menu-row">
+      <div>
+        <div class="wf-menu-name">Feijão</div>
+      </div>
+      <div class="wf-menu-price">R$ 8</div>
+    </div>
+    <div class="wf-menu-row">
+      <div>
+        <div class="wf-menu-name">Salada da estação</div>
+        <div class="wf-menu-desc">Folhas, tomate, pepino e azeite — varia com o mercado.</div>
+      </div>
+      <div class="wf-menu-price">R$ 12</div>
+    </div>
+    <div class="wf-menu-row">
+      <div>
+        <div class="wf-menu-name">Pão de fermentação</div>
+      </div>
+      <div class="wf-menu-price">R$ 10</div>
+    </div>
+  </div>
+
+  <!-- BEBIDAS -->
+  <div class="wf-drinks-header">
+    <div class="wf-eyebrow">Bebidas</div>
+  </div>
+  <div class="wf-drinks-grid">
+    <div class="wf-drink-card">
+      <div>
+        <div class="wf-drink-name">Água</div>
+        <div class="wf-drink-sub">Com ou sem gás · 500ml</div>
+      </div>
+      <div class="wf-drink-price">R$ 5</div>
+    </div>
+    <div class="wf-drink-card">
+      <div>
+        <div class="wf-drink-name">Refrigerante</div>
+        <div class="wf-drink-sub">Lata · 350ml</div>
+      </div>
+      <div class="wf-drink-price">R$ 7</div>
+    </div>
+    <div class="wf-drink-card">
+      <div>
+        <div class="wf-drink-name">Cerveja</div>
+        <div class="wf-drink-sub">Long neck · 355ml</div>
+      </div>
+      <div class="wf-drink-price">R$ 12</div>
+    </div>
+  </div>
+
+  <div class="wf-footer">
+    <div class="wf-footer__grid">
+      <div>
+        <div class="wf-footer__brand-name">Escritório de Bohemio</div>
+        <div class="wf-footer__brand-sub">Um lugar quieto, com mesa de madeira, vinho aberto e gente que volta toda semana.</div>
+      </div>
+      <div class="wf-footer__col"><div class="wf-footer__col-title">Endereço</div><p>Sua cidade</p></div>
+      <div class="wf-footer__col"><div class="wf-footer__col-title">Horário</div><p>Seg–Sex · 19h–23h<br/>Sáb · 19h–01h</p></div>
+      <div class="wf-footer__col"><div class="wf-footer__col-title">Contato</div><p>WhatsApp<br/>Instagram</p></div>
+    </div>
+    <div class="wf-footer__base">
+      <span>© 2026 Escritório de Bohemio</span>
+      <span>Política de privacidade · Termos</span>
+    </div>
+  </div>
+
+</div>
+<p style="font-family:monospace;font-size:11px;color:#8A8369;text-align:center;margin-top:16px;padding-bottom:8px">
+  v2 · categorias corretas · Responda no terminal com feedback ou aprovação
+</p>
+</body>
+</html>

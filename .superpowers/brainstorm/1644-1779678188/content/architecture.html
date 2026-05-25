@@ -1,0 +1,43 @@
+<h2>Qual abordagem de arquitetura faz mais sentido?</h2>
+<p class="subtitle">Comparando três níveis de complexidade para o Next.js + PostgreSQL na VPS</p>
+
+<div class="options">
+  <div class="option" data-choice="static-first" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Estático primeiro — cresce quando precisar</h3>
+      <p>Next.js 14 com App Router. Todas as páginas são Server Components estáticos. Tailwind + tokens do design system. PostgreSQL conectado via Prisma, mas sem tabelas por enquanto — só a estrutura pronta. WhatsApp via link direto. Deploy com PM2 + Nginx na VPS.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Prós</h4><ul><li>Simples de manter</li><li>Carrega rápido (sem queries)</li><li>Fácil de evoluir — Prisma já está lá</li></ul></div>
+        <div class="cons"><h4>Contras</h4><ul><li>Para Empresas só via WhatsApp (sem guardar leads)</li></ul></div>
+      </div>
+      <p style="margin-top:12px"><strong>⭐ Recomendado</strong> — entrega rápido, não desperdiça complexidade que ainda não é necessária.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="with-leads" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Com captação de leads — BD ativo desde o início</h3>
+      <p>Igual ao A, mas o formulário de "Para Empresas" salva nome, e-mail e mensagem no PostgreSQL além de redirecionar pro WhatsApp. Dá pra ver os contatos depois. Uma tabela só.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Prós</h4><ul><li>Histórico de quem entrou em contato</li><li>BD já em uso real desde o dia 1</li></ul></div>
+        <div class="cons"><h4>Contras</h4><ul><li>Precisa de página/rota de admin pra ver os leads (ou acesso direto ao banco)</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="full-stack" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Full-stack completo — admin desde o início</h3>
+      <p>App Router + Server Actions + Prisma + autenticação (NextAuth). Painel admin para ver leads, futuramente editar cardápio e eventos. Mais semanas de trabalho.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Prós</h4><ul><li>Tudo pronto para escalar</li></ul></div>
+        <div class="cons"><h4>Contras</h4><ul><li>Muito mais complexo agora</li><li>A maioria das features ficaria ociosa no início</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top:24px">Selecione e comente no terminal.</p>
